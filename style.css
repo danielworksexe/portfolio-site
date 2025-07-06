@@ -1,0 +1,256 @@
+/* --- ESTILO MODERNO PARA PORTFÓLIO --- */
+
+/* 1. IMPORTAÇÃO DE FONTES MODERNAS (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+/* 2. VARIÁVEIS DE COR (para fácil customização) */
+:root {
+    --cor-fundo: #12121c; /* Fundo escuro, quase preto */
+    --cor-primaria: #1e1e2f; /* Cor dos "cards" das seções */
+    --cor-destaque: #00aaff; /* Azul elétrico vibrante */
+    --cor-texto: #e0e0e0; /* Texto principal (cinza claro) */
+    --cor-cabecalho: #ffffff; /* Títulos (branco) */
+    --fonte-titulo: 'Poppins', sans-serif;
+    --fonte-corpo: 'Lato', sans-serif;
+}
+
+/* 3. RESET BÁSICO E ESTILOS GLOBAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Rolagem suave ao clicar nos links do menu */
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.7;
+
+    /* ADIÇÕES PARA O RODAPÉ FIXO */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que o corpo ocupe no mínimo 100% da altura da tela */
+}
+
+/* 4. ANIMAÇÕES (Keyframes) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 5. ESTILO DO CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* 6. CABEÇALHO E NAVEGAÇÃO */
+header {
+    /* FUNDO GRADIENTE: Uma alternativa moderna e compatível com todos os navegadores.
+       Começa com uma cor sólida escura e vai para uma versão um pouco mais clara.
+    */
+    background: linear-gradient(90deg, #12121c 0%, #1e1e2f 100%);
+    
+    /* TENTATIVA DE EFEITO VIDRO (COM PREFIXO PARA MAIOR COMPATIBILIDADE):
+       Isto vai funcionar em navegadores que dão suporte (Chrome, Edge, Safari).
+       Em outros, o gradiente acima servirá como um ótimo substituto visual.
+    */
+    -webkit-backdrop-filter: blur(10px); /* Para navegadores WebKit como o Safari */
+    backdrop-filter: blur(10px);
+    background-color: rgba(30, 30, 47, 0.85); /* Mantido como fallback */
+
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #2a2a3f; /* Uma borda mais escura para o tema */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 1.8rem;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 25px;
+}
+
+header nav a {
+    color: var(--cor-cabecalho);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Animação de sublinhado no link do menu */
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--cor-destaque);
+    transition: width 0.4s ease;
+}
+
+header nav a:hover {
+    color: var(--cor-destaque);
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* 7. CONTEÚDO PRINCIPAL E SEÇÕES */
+main {
+    padding-top: 120px;
+    padding-bottom: 40px;
+
+    /* ADIÇÃO PARA O RODAPÉ FIXO */
+    flex-grow: 1; /* Faz o conteúdo principal "crescer" para ocupar o espaço vazio */
+}
+
+main section {
+    display: none; /* Esconde todas as seções por padrão */
+    background-color: var(--cor-primaria);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    border: 1px solid #2a2a3f;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* A mágica da página única: mostra a seção clicada com animação */
+main section:target,
+main section#inicio {
+    display: block;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+main section#inicio:has(~ section:target) {
+    display: none;
+}
+
+h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-cabecalho);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--cor-destaque);
+    padding-left: 15px;
+}
+
+h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin-top: 1rem;
+}
+
+/* 8. ESTILOS ESPECÍFICOS (Portfólio e Contato) */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid responsivo */
+    gap: 25px;
+}
+
+.portfolio-item {
+    background: var(--cor-fundo);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #2a2a3f;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-10px); /* Efeito de flutuar */
+    box-shadow: 0 10px 20px rgba(0, 170, 255, 0.1);
+}
+
+.portfolio-item a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    background-color: var(--cor-destaque);
+    color: var(--cor-cabecalho);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-item a:hover {
+    background-color: #0077b3;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #2a2a3f;
+    color: var(--cor-texto);
+    font-size: 1rem;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--cor-destaque);
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.3);
+}
+
+form button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--cor-destaque);
+    color: var(--cor-cabecalho);
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: var(--fonte-titulo);
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0077b3;
+    transform: scale(1.02); /* Leve aumento no hover */
+}
+
+/* 9. RODAPÉ */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: var(--cor-primaria);
+    border-top: 1px solid #2a2a3f;
+    margin-top: 2rem;
+}
